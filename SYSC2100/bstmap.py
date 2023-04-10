@@ -1,9 +1,7 @@
 # An implementation of ADT Map that uses a binary search tree as the
 # underlying data structure.
 
-
 __author__ = 'Erik Caldwell'
-__student_number__ = '101220516'
 
 
 class BSTMap:
@@ -91,7 +89,6 @@ class BSTMap:
             # The tree is empty, so use an empty list's iterator
             # as the tree's iterator.
             return iter([])
-        
 
     def __setitem__(self, key: any, newvalue: any):
         """ 
@@ -107,11 +104,11 @@ class BSTMap:
                 self._num_entries += 1
                 return BSTMap._Node(key, newvalue)
 
-            if node.key == key: 
+            if node.key == key:
                 # Found the key, set the value
                 node.value = newvalue
                 return node
-            
+
             if key < node.key:
                 # Insert x in node's left subtree.
                 node.left = _set_item(node.left, key, newvalue)
@@ -136,10 +133,10 @@ class BSTMap:
                 # Key not in tree, raise KeyError
                 raise KeyError(f'{key}')
 
-            if node.key == key: 
+            if node.key == key:
                 # Found the key, return the value
                 return node.value
-            
+
             if key < node.key:
                 # Look through the node's left subtree.
                 return _get_item(node.left, key)
@@ -147,10 +144,9 @@ class BSTMap:
                 # Look through the node's right subtree.
                 return _get_item(node.right, key)
 
-
         return _get_item(self._root, key)
 
-    def get(self, key: any, default_value = None) -> any:
+    def get(self, key: any, default_value=None) -> any:
         """ 
         Get the value at the given key. 
         Returns the default value if the key doesn't exist.
@@ -164,17 +160,16 @@ class BSTMap:
                 # Key not in tree, raise KeyError
                 return default_value
 
-            if node.key == key: 
+            if node.key == key:
                 # Found the key, return the value
                 return node.value
-            
+
             if key < node.key:
                 # Look through the node's left subtree.
                 return _get(node.left, key)
             else:
                 # Look through the node's right subtree.
                 return _get(node.right, key)
-
 
         return _get(self._root, key)
 
@@ -183,7 +178,6 @@ class BSTMap:
         Get the number of key/value pairs in the Map.
         """
         return self._num_entries
-
 
     def __contains__(self, key: any) -> bool:
         """ 
@@ -197,15 +191,15 @@ class BSTMap:
                 # Got to a leaf without finding the key
                 return False
 
-            if node.key == key: 
+            if node.key == key:
                 # Found the key
                 return True
-            
+
             if key < node.key:
                 # Look through the node's left subtree.
                 return _contains(node.left, key)
             else:
                 # Look through the node's right subtree.
                 return _contains(node.right, key)
-            
+
         return _contains(self._root, key)
